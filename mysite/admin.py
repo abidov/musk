@@ -1,8 +1,11 @@
 from django.contrib import admin
-
-# Register your models here.
 from .models import Clients
+from import_export.admin import ImportExportModelAdmin
 
-admin.site.register(Clients)
 
+
+
+@admin.register(Clients)
+class ViewAdmin(ImportExportModelAdmin):
+	pass
 

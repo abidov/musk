@@ -7,9 +7,9 @@ class Event(models.Model):
 class Clients(models.Model):
     name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
-    date = models.IntegerField(blank=True, null=True)
+    date = models.DateField()
     phone_number = models.IntegerField()
-    email = models.CharField(max_length=255)
+    email = models.EmailField()
     event = models.ManyToManyField(Event)
 
     def __str__(self):
