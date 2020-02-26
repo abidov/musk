@@ -1,9 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
 from .models import Client, Event
 # Create your views here.
+from users.decorators import logged_only
+from django.http import HttpResponse
 
 class IndexView(View):
     def get(self, request):
-        if request.user.is_authenticated:
-            return render(request, 'home/index.html', {'clients': Client.objects.all().filter(user=request.user)})
+        return render(request, 'home/index.html')
