@@ -26,7 +26,7 @@ SECRET_KEY = '2(1@td2mnntmcmqdtnu*8pml!1sy=rh_2@=xxw)^tbtd9klnxj'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+TIME_INPUT_FORMATS = ['%H:%M']
 
 # Application definition
 

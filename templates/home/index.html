@@ -33,10 +33,93 @@
     </nav>
 
     <h1>Index page</h1>
-    {% for client in clients %}
-    {{client}}
-    {% endfor %}
+    <a href="#createModal" data-toggle="modal" data-target="#createModal">Создать Event</a>
+    <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="CreateModel" aria-hidden="true">
+        <form action="{% url 'index' %}" method="POST" role="form">
+            {% csrf_token %}
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Create Event</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        {{form_event.name}}
+                        <hr>
+                        {{form_event.event_date}}
+                        <hr>
+                        {{form_event.event_time}}
+                        <hr>
+                        {{form_event.place}}
+                        <hr>
+                        {{form_event.price}}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Create</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 
+    <form action="" class="mt-1 text-right form-group">
+        <div class="form-group text-center bg-info">
+            <label for="exampleFormControlTextarea1"><h3><strong>Рассылка</strong></h3></label>
+            <textarea class="form-control shadow" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+        <div class="custom-file text-left" style="width: 259px;">
+            <input type="file" class="custom-file-input" id="validatedCustomFile" required>
+            <label class="custom-file-label" for="validatedCustomFile">Выберите файл</label>
+            <div class="invalid-feedback">Example invalid custom file feedback</div>
+        </div>
+        <button class="btn btn-primary mr-2" type="submit">Отправить</button>
+    </form>
+    <div class="w-75 form-check text-right">
+        <input class="form-check-input position-static text-right" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
+        <label class="form-check-label">
+            <h6 class="text-dark">Отметить всех</h6>
+        </label>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10">
+                <div class="ml-1 mt-1 border border-dark" >
+                    <div class="bg-info card-header text-center">
+                        <h6 class="d-inline-block text-center" style="width: 160px;">ФИО</h6>
+                        <h6 class="d-inline-block text-center" style="width: 160px;">ДР</h6>
+                        <h6 class="d-inline-block text-center" style="width: 160px;">Дистанция</h6>
+                        <h6 class="d-inline-block text-center" style="width: 160px;">Номер</h6>
+                        <h6 class="d-inline-block text-center" style="width: 160px;">Мыло</h6>
+                    </div>
+                    <div class="bg-light card-body text-center">
+                        <h6 class="d-inline-block text-center" style="width: 160px;">Фамилия Имя Отчество</h6>
+                        <h6 class="d-inline-block text-center" style="width: 160px;">00.00.0000</h6>
+                        <h6 class="d-inline-block text-center" style="width: 160px;">Дистанция</h6>
+                        <h6 class="d-inline-block text-center" style="width: 160px;">0111010101</h6>
+                        <h6 class="d-inline-block text-center" style="width: 160px;">mail@mail.mail</h6>
+                    </div>
+                    <div class="bg-info shadow card-footer text-center">
+                        <a href="#" class="btn btn-warning" style="width: 100px;">Изменить</a>
+                        <a href="#" class="btn btn-danger" style="width: 100px;">Удалить</a>
+                        <div class="form-check text-right">
+                            <input class="form-check-input position-static text-right" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-1 col-lg-2">
+                <div class="card bg-info border-dark">
+                    <a class="text-dark" href="">Event</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
