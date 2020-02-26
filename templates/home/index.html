@@ -29,11 +29,13 @@
             </li>
             {% endif %}
         </ul>
+           {% if user.is_authenticated %}
+          <span class="my-2 my-lg-0">
+              <a href="#createModal" data-toggle="modal" data-target="#createModal" class="btn btn-outline-success my-2 my-sm-0">Создать Event</a>
+          </span>
+          {% endif %}
       </div>
     </nav>
-
-    <h1>Index page</h1>
-    <a href="#createModal" data-toggle="modal" data-target="#createModal">Создать Event</a>
     <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="CreateModel" aria-hidden="true">
         <form action="{% url 'index' %}" method="POST" role="form">
             {% csrf_token %}
@@ -65,25 +67,6 @@
         </form>
     </div>
 
-    <form action="" class="mt-1 text-right form-group">
-        <div class="form-group text-center bg-info">
-            <label for="exampleFormControlTextarea1"><h3><strong>Рассылка</strong></h3></label>
-            <textarea class="form-control shadow" id="exampleFormControlTextarea1" rows="3"></textarea>
-        </div>
-        <div class="custom-file text-left" style="width: 259px;">
-            <input type="file" class="custom-file-input" id="validatedCustomFile" required>
-            <label class="custom-file-label" for="validatedCustomFile">Выберите файл</label>
-            <div class="invalid-feedback">Example invalid custom file feedback</div>
-        </div>
-        <button class="btn btn-primary mr-2" type="submit">Отправить</button>
-    </form>
-    <div class="w-75 form-check text-right">
-        <input class="form-check-input position-static text-right" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
-        <label class="form-check-label">
-            <h6 class="text-dark">Отметить всех</h6>
-        </label>
-    </div>
-
     <table class="table">
       <thead class="thead-dark">
         <tr>
@@ -107,11 +90,6 @@
         </tr>
       {% endfor %}
 
-    <div class="list-group">
-        {% for event in events %}
-        <a href="#" class="list-group-item list-group-item-action">{{event}}</a>
-        {% endfor %}
-    </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
