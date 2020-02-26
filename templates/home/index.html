@@ -84,41 +84,33 @@
         </label>
     </div>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-10">
-                <div class="ml-1 mt-1 border border-dark" >
-                    <div class="bg-info card-header text-center">
-                        <h6 class="d-inline-block text-center" style="width: 160px;">ФИО</h6>
-                        <h6 class="d-inline-block text-center" style="width: 160px;">ДР</h6>
-                        <h6 class="d-inline-block text-center" style="width: 160px;">Дистанция</h6>
-                        <h6 class="d-inline-block text-center" style="width: 160px;">Номер</h6>
-                        <h6 class="d-inline-block text-center" style="width: 160px;">Мыло</h6>
-                    </div>
-                    <div class="bg-light card-body text-center">
-                        <h6 class="d-inline-block text-center" style="width: 160px;">Фамилия Имя Отчество</h6>
-                        <h6 class="d-inline-block text-center" style="width: 160px;">00.00.0000</h6>
-                        <h6 class="d-inline-block text-center" style="width: 160px;">Дистанция</h6>
-                        <h6 class="d-inline-block text-center" style="width: 160px;">0111010101</h6>
-                        <h6 class="d-inline-block text-center" style="width: 160px;">mail@mail.mail</h6>
-                    </div>
-                    <div class="bg-info shadow card-footer text-center">
-                        <a href="#" class="btn btn-warning" style="width: 100px;">Изменить</a>
-                        <a href="#" class="btn btn-danger" style="width: 100px;">Удалить</a>
-                        <div class="form-check text-right">
-                            <input class="form-check-input position-static text-right" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+            <th scope="col"><input type="checkbox"></th>
+            <th scope="col">Name</th>
+            <th scope="col">Event date</th>
+            <th scope="col">Event time</th>
+            <th scope="col">Place</th>
+            <th scope="col">Price</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for event in events %}
+        <tr>
+            <th scope="col"><input type="checkbox"></th>
+            <td>{{event.name}}</td>
+            <td>{{event.event_date}}</td>
+            <td>{{event.event_time}}</td>
+            <td>{{event.place}}</td>
+            <td>{% if event.price %}{{event.price}}{% else %}Free{% endif %}</td>
+        </tr>
+      {% endfor %}
 
-            <div class="mt-1 col-lg-2">
-                <div class="card bg-info border-dark">
-                    <a class="text-dark" href="">Event</a>
-                </div>
-            </div>
-
-        </div>
+    <div class="list-group">
+        {% for event in events %}
+        <a href="#" class="list-group-item list-group-item-action">{{event}}</a>
+        {% endfor %}
     </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

@@ -6,7 +6,6 @@ from django.http import HttpResponse
 
 class IndexView(View):
     def get(self, request):
-        print('get')
         if request.user.is_authenticated:
             form_event = EventForm()
             events = Event.objects.all().filter(user=request.user)
