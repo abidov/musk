@@ -7,9 +7,6 @@ from django.contrib.auth.models import Group
 from .decorators import unauthenticated_user, logged_only, notlogged_only
 
 # Create your views here.
-@logged_only
-def index(request):
-    return render(request, 'home/index.html', {})
 
 @logged_only
 def userPage(request):
