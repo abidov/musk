@@ -1,4 +1,4 @@
-from .models import Client, Event
+from .models import Client, Event, Message
 from django import forms
 import datetime
 
@@ -41,5 +41,15 @@ class EventForm(forms.ModelForm):
             ),
         }
 
-class CheckBoxForm(forms.Form):
-    checkbox = forms.CheckboxInput()
+class MessageForm(forms.ModelForm):
+    class Meta:
+        model = Message
+        fields = '__all__'
+        widgets = {
+            'subject': forms.TextInput(
+                attrs={'maxlength': '255', 'placeholder': 'Enter subject:', 'class': 'form-control', 'required': 'required'}
+            ),
+            'message': forms.TextInput(
+                attrs={'placeholder': 'Enter message:', 'class': 'form-control', 'required': 'required'}
+            ),
+        }

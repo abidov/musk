@@ -35,6 +35,7 @@
           </span>
           {% endif %}
       </div>
+        <a href="#sendModal" data-toggle="modal" data-target="#sendModal" class="btn btn-outline-success my-2 my-sm-0">Send email</a>
     </nav>
 
 
@@ -63,6 +64,31 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Create</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="modal fade" id="sendModal" tabindex="-1" role="dialog" aria-labelledby="sendModel" aria-hidden="true">
+        <form action="{% url 'send_message_form' event.id %}" method="POST" role="form">
+            {% csrf_token %}
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLab">Send Mail</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        {{form_send.subject}}
+                        <hr>
+                        {{form_send.message}}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Send</button>
                     </div>
                 </div>
             </div>

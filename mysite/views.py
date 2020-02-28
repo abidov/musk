@@ -1,16 +1,19 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from .forms import ClientForm, EventForm, CheckBoxForm
+from .forms import ClientForm, EventForm, MessageForm
 from .models import Client, Event
-from django.http import HttpResponse
+from django.core import mail
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+import datetime
+
 
 class IndexView(View):
     def get(self, request):
         if request.user.is_authenticated:
             form_event = EventForm()
-            form_checkbox = CheckBoxForm()
             events = Event.objects.filter(user=request.user)
-            return render(request, 'home/index.html', {'events': events, 'form_event': form_event, 'form_checkbox': form_checkbox})
+            return render(request, 'home/index.html', {'events': events, 'form_event': form_event})
         else:
             return redirect('login')
 
@@ -28,13 +31,15 @@ class IndexView(View):
         else:
             return redirect('login')
 
+
 class EventDetailView(View):
     def get(self, request, event_id):
         if request.user.is_authenticated:
             form_client = ClientForm()
+            form_send = MessageForm()
             event = Event.objects.get(pk=event_id, user=request.user)
             clients = Client.objects.filter(user=request.user, event=event)
-            return render(request, 'home/event_detail.html', {'clients': clients, 'form_client': form_client, 'event': event})
+            return render(request, 'home/event_detail.html', {'clients': clients, 'form_client': form_client, 'event': event, 'form_send': form_send})
         return redirect('login')
 
     def post(self, request, event_id):
@@ -51,6 +56,25 @@ class EventDetailView(View):
             return redirect('event_detail', event_id=event_id)
         return redirect('login')
 
+class SendMessageView(View):
+    def get(self, request, event_id):
+        message_form = MessageForm()
+        event = Event.objects.get(user=request.user, pk=event_id)
+        return render(request, 'home/send_form.html', {'message_form': message_form, 'event': event})
+
+    def post(self, request, event_id):
+        event = Event.objects.get(pk=event_id, user=request.user)
+        clients = Client.objects.filter(user=request.user, event=event)
+        form = MessageForm(request.POST)
+        if form.is_valid():
+            subject = request.POST.get('subject')
+            message = request.POST.get('message')
+            html_message = render_to_string('send/email_template.html', {'event': event, 'message': message})
+            plain_message = strip_tags(html_message)
+            mail.send_mail(subject, plain_message, 'adidovvv.arslan@gmail.com', [client.email for client in clients], html_message=html_message)
+            return redirect('index')
+
+
 def delete_client(request, client_id):
     if request.user.is_authenticated:
         client = Client.objects.filter(pk=client_id,
@@ -58,6 +82,7 @@ def delete_client(request, client_id):
         client.delete()
         return redirect('event_detail', event_id=client.event.id)
     return redirect('login')
+
 
 def delete_event(request, event_id):
     if request.user.is_authenticated:

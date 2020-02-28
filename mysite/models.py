@@ -8,6 +8,7 @@ class Event(models.Model):
     price = models.FloatField(blank=True, null=True)
     event_time = models.TimeField(null=False)
     user = models.ForeignKey(User, related_name='events', on_delete=models.CASCADE)
+    active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.name
@@ -19,8 +20,13 @@ class Client(models.Model):
     birth_date = models.DateField()
     phone_number = models.CharField(max_length=20)
     email = models.EmailField()
-    event = models.ForeignKey(Event, related_name='clients', on_delete=models.CASCADE)
-    user = models.ForeignKey(User, related_name='clients', on_delete=models.CASCADE)
+    event = models.ForeignKey(Event, related_name='clients', on_delete=models.CASCADE, null=True, blank=True)
+    user = models.ForeignKey(User, related_name='clients', on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.name
+
+class Message(models.Model):
+    subject = models.CharField(max_length=255)
+    message = models.TextField()
+
