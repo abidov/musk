@@ -19,7 +19,7 @@ class Client(models.Model):
     birth_date = models.DateField()
     phone_number = models.CharField(max_length=20)
     email = models.EmailField()
-    event = models.ManyToManyField(Event, related_name='events')
+    event = models.ForeignKey(Event, related_name='clients', on_delete=models.CASCADE)
     user = models.ForeignKey(User, related_name='clients', on_delete=models.CASCADE)
 
     def __str__(self):

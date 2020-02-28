@@ -31,13 +31,15 @@
         </ul>
            {% if user.is_authenticated %}
           <span class="my-2 my-lg-0">
-              <a href="#createModal" data-toggle="modal" data-target="#createModal" class="btn btn-outline-success my-2 my-sm-0">Создать Event</a>
+              <a href="#createModal" data-toggle="modal" data-target="#createModal" class="btn btn-outline-success my-2 my-sm-0">Добавить Client</a>
           </span>
           {% endif %}
       </div>
     </nav>
-    <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="CreateModel" aria-hidden="true">
-        <form action="{% url 'index' %}" method="POST" role="form">
+
+
+   <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="CreateModel" aria-hidden="true">
+        <form action="{% url 'event_detail' event.id%}" method="POST" role="form">
             {% csrf_token %}
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -48,15 +50,15 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        {{form_event.name}}
+                        {{form_client.name}}
                         <hr>
-                        {{form_event.event_date}}
+                        {{form_client.last_name}}
                         <hr>
-                        {{form_event.event_time}}
+                        {{form_client.birth_date}}
                         <hr>
-                        {{form_event.place}}
+                        {{form_client.phone_number}}
                         <hr>
-                        {{form_event.price}}
+                        {{form_client.email}}
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -67,26 +69,28 @@
         </form>
     </div>
 
+
+
     <table class="table">
       <thead class="thead-dark">
         <tr>
             <th scope="col">Delete</th>
             <th scope="col">Name</th>
-            <th scope="col">Event date</th>
-            <th scope="col">Event time</th>
-            <th scope="col">Place</th>
-            <th scope="col">Price</th>
+            <th scope="col">Last name</th>
+            <th scope="col">Birth date</th>
+            <th scope="col">Phone number</th>
+            <th scope="col">Email</th>
         </tr>
       </thead>
       <tbody>
-      {% for event in events %}
+      {% for client in clients %}
         <tr>
-            <td><a href="{% url 'delete_event' event.id %}"><i class="fas fa-minus-square"></i></a></td>
-            <td><a href="{% url 'event_detail' event.id %}">{{event.name}}</a></td>
-            <td>{{event.event_date}}</td>
-            <td>{{event.event_time}}</td>
-            <td>{{event.place}}</td>
-            <td>{% if event.price %}{{event.price}}{% else %}Free{% endif %}</td>
+            <td><a href="{% url 'delete_client' client.id %}"><i class="fas fa-minus-square"></i></a></td>
+            <td><a href="">{{client.name}}</a></td>
+            <td>{{client.last_name}}</td>
+            <td>{{client.birth_date}}</td>
+            <td>{{client.phone_number}}</td>
+            <td>{{client.email}}</td>
         </tr>
       {% endfor %}
 
