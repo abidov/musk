@@ -1,4 +1,4 @@
-from .models import Client, Event, Message
+from .models import Client, Event, Message, Document
 from django import forms
 import datetime
 
@@ -53,3 +53,11 @@ class MessageForm(forms.ModelForm):
                 attrs={'placeholder': 'Enter message:', 'class': 'form-control', 'required': 'required'}
             ),
         }
+
+
+
+
+class DocumentForm(forms.ModelForm):
+    class Meta:
+        model = Document
+        fields = ('description', 'document', )

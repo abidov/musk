@@ -36,6 +36,11 @@
           {% endif %}
       </div>
         <a href="#sendModal" data-toggle="modal" data-target="#sendModal" class="btn btn-outline-success my-2 my-sm-0">Send email</a>
+        <form action="{% url 'upload' event.id %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Upload</button>
+        </form>
     </nav>
 
 
@@ -45,7 +50,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Create Event</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Create Client</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -96,6 +101,12 @@
     </div>
 
 
+
+    <div class="container">
+      <div class="row">
+        <div class="col">Total Clients: {{clients_count}}</div>
+      </div>
+    </div>
 
     <table class="table">
       <thead class="thead-dark">
