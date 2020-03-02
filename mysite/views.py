@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views import View
+from django.views.generic import UpdateView 
 from .forms import ClientForm, EventForm, MessageForm, DocumentForm
 from .models import Client, Event, Document
 from django.core import mail
@@ -9,6 +10,9 @@ import datetime
 import os
 from django.conf import settings
 import csv
+from django.urls import reverse, reverse_lazy
+
+
 
 
 class IndexView(View):
@@ -42,6 +46,22 @@ class IndexView(View):
             return redirect('index')
         else:
             return redirect('login')
+
+class UpdateEvent(UpdateView):
+    template_name = "home/edit.html"
+    model = Event
+    form_class = EventForm
+
+    def get_success_url(self):
+        return reverse('index')
+
+    # def get(self, request):
+    #     form = EventForm(instance=self.object)
+
+    # def post(self, request):
+    #     form = EventForm(instance=self.request.POST)
+    #     return redirect('index')
+
 
 
 class EventDetailView(View):

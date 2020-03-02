@@ -77,6 +77,7 @@
     <table class="table">
       <thead class="thead-dark">
         <tr>
+            <th scope="col">Redirect</th>
             <th scope="col">Delete</th>
             <th scope="col">Name</th>
             <th scope="col">Event date</th>
@@ -88,6 +89,7 @@
       <tbody>
       {% for event in events %}
         <tr>
+            <td><a href="{% url 'edit_event' event.id %}">Edit</a></td>
             <td><a href="{% url 'delete_event' event.id %}"><i class="fas fa-minus-square"></i></a></td>
             <td><a href="{% url 'event_detail' event.id %}">{{event.name}}</a></td>
             <td>{{event.event_date}}</td>
