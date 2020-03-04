@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import IndexView, EventDetailView, delete_client, delete_event, SendMessageView, model_form_upload
+from .views import IndexView, EventDetailView, delete_client, delete_event, SendMessageView, model_form_upload, UpdateEvent
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -10,4 +10,5 @@ urlpatterns= [
     path('event/delete_event/<int:event_id>/', delete_event, name='delete_event'),
     path('event/send_email_form/<int:event_id>/', SendMessageView.as_view(), name='send_message_form'),
     path('event/save_file/<int:event_id>/', model_form_upload, name='upload'),
+    path('event/edit_event/<int:pk>/update/', UpdateEvent.as_view(), name = "edit_event"),
 ]

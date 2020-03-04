@@ -1,0 +1,16 @@
+<form method="post">{% csrf_token %}
+	{% for field in form %}
+		{% if field == form.event_date %}
+		  <input type="date" name='event_date' value="{{form.event_date.value}}" placeholder="{{form.event_date.value}}">
+		
+		<!-- {{form.event_date.value}} -->
+ {% else %}
+			<p>{{field}}</p>
+		{% endif %}
+		
+	{% endfor %}
+
+    
+    <input type="submit" value="Update">
+    
+</form>

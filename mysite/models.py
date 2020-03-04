@@ -1,5 +1,8 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.urls import reverse
+
+
 
 class Event(models.Model):
     name = models.CharField(max_length=255, null=False)
@@ -12,6 +15,7 @@ class Event(models.Model):
 
     def __str__(self):
         return self.name
+
 
 
 class Client(models.Model):

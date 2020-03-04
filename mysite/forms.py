@@ -2,6 +2,7 @@ from .models import Client, Event, Message, Document
 from django import forms
 import datetime
 
+
 class ClientForm(forms.ModelForm):
     class Meta:
         model = Client
@@ -41,6 +42,7 @@ class EventForm(forms.ModelForm):
             ),
         }
 
+
 class MessageForm(forms.ModelForm):
     class Meta:
         model = Message
@@ -61,3 +63,5 @@ class DocumentForm(forms.ModelForm):
     class Meta:
         model = Document
         fields = ('description', 'document', )
+
+        
